@@ -84,6 +84,51 @@
             font-weight: bold;
             margin-left: 10px;
         }
+        
+        /* NUEVOS ESTILOS PARA LAS SECCIONES ADICIONALES */
+        .section-separator {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 50px 0 30px 0;
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+        .section-separator h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .document-content {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #007bff;
+            margin-bottom: 30px;
+        }
+        .document-content pre {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            border: 1px solid #dee2e6;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 40px;
+        }
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -274,11 +319,73 @@
             </ol>
         </div>
 
+        <!-- NUEVA SECCIÓN 1: GUIÓN MAESTRO PRINCIPAL -->
+        <div class="section-separator">
+            <h2>📋 GUIÓN MAESTRO PRINCIPAL</h2>
+            <p>Documento principal para workflows N8N</p>
+        </div>
+        
+        <div class="document-content">
+            <div id="guion-content" class="loading">Cargando guión maestro principal...</div>
+        </div>
+
+        <!-- NUEVA SECCIÓN 2: INFORMACIÓN DEL PRODUCTO -->
+        <div class="section-separator">
+            <h2>📦 INFORMACIÓN DEL PRODUCTO</h2>
+            <p>Detalles completos del Sistema AEMT</p>
+        </div>
+        
+        <div class="document-content">
+            <div id="producto-content" class="loading">Cargando información del producto...</div>
+        </div>
+
+        <!-- NUEVA SECCIÓN 3: MATERIAL DE APOYO -->
+        <div class="section-separator">
+            <h2>🎯 MATERIAL DE APOYO</h2>
+            <p>Recursos adicionales y estrategias complementarias</p>
+        </div>
+        
+        <div class="document-content">
+            <div id="material-content" class="loading">Cargando material de apoyo...</div>
+        </div>
+
         <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #128C7E;">
             <h4>📋 Nota crítica para el desarrollo de la IA:</h4>
             <p>Cada una de estas 16 conversaciones incluye el contexto completo de audios (explicaciones detalladas de Paco sobre el sistema, metodología, precios, manejo de objeciones) e imágenes (capturas de pantalla de procesos de pago, comprobantes bancarios, instrucciones visuales). La IA debe referenciar y utilizar estos elementos multimedia en el momento apropiado del flujo de conversación para replicar exactamente el éxito de estas ventas reales.</p>
             <p><strong>Resultado esperado:</strong> Conversiones similares siguiendo estos patrones exactos de las 16 conversaciones exitosas.</p>
         </div>
     </div>
+
+    <script>
+        // Cargar Guión Maestro Principal
+        fetch('guion maestro principal.txt')
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('guion-content').innerHTML = '<pre>' + text + '</pre>';
+            })
+            .catch(error => {
+                document.getElementById('guion-content').innerHTML = '<div class="error">❌ Error cargando el guión maestro principal.</div>';
+            });
+
+        // Cargar Información del Producto
+        fetch('INFORMACION DEL PRODUCTO.txt')
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('producto-content').innerHTML = '<pre>' + text + '</pre>';
+            })
+            .catch(error => {
+                document.getElementById('producto-content').innerHTML = '<div class="error">❌ Error cargando la información del producto.</div>';
+            });
+
+        // Cargar Material de Apoyo
+        fetch('MATERIAL DE APOYO - CONOCIMIENTO SECUNDARIO.txt')
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('material-content').innerHTML = '<pre>' + text + '</pre>';
+            })
+            .catch(error => {
+                document.getElementById('material-content').innerHTML = '<div class="error">❌ Error cargando el material de apoyo.</div>';
+            });
+    </script>
 </body>
 </html>
